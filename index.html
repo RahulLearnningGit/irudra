@@ -1,1 +1,138 @@
-<h1>Under maintainance . . . !</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Under Maintenance</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+text-align: center;
+background-image: linear-gradient(to bottom, #ff99cc, #ffeecc);
+background-size: 100% 300px;
+background-position: 0% 100%;
+transition: background-position 0.5s ease-in-out;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+}
+
+.container {
+max-width: 600px;
+padding: 20px;
+background-color: #fff;
+border: 1px solid #ddd;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+border-radius: 10px;
+}
+
+h1 {
+color: #333;
+animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+0% {
+transform: translateY(0);
+}
+50% {
+transform: translateY(-10px);
+}
+100% {
+transform: translateY(0);
+}
+}
+
+.fidget-game {
+margin-top: 20px;
+}
+
+.tile-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+grid-gap: 10px;
+}
+
+.tile {
+background-color: #333;
+color: #fff;
+padding: 20px;
+cursor: pointer;
+}
+
+.tile:hover {
+background-color: #555;
+}
+
+.matched {
+background-color: #333;
+color: #fff;
+padding: 20px;
+cursor: default;
+}
+
+.matched:hover {
+background-color: #333;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Under Maintenance</h1>
+<p>Website under maintenance, back soon!</p>
+<div class="fidget-game">
+<div class="tile-grid">
+<div class="tile" onclick="flipTile(this)">1</div>
+<div class="tile" onclick="flipTile(this)">2</div>
+<div class="tile" onclick="flipTile(this)">3</div>
+<div class="tile" onclick="flipTile(this)">4</div>
+<div class="tile" onclick="flipTile(this)">5</div>
+<div class="tile" onclick="flipTile(this)">6</div>
+<div class="tile" onclick="flipTile(this)">7</div>
+<div class="tile" onclick="flipTile(this)">8</div>
+<div class="tile" onclick="flipTile(this)">9</div>
+<div class="tile" onclick="flipTile(this)">10</div>
+<div class="tile" onclick="flipTile(this)">11</div>
+<div class="tile" onclick="flipTile(this)">12</div>
+</div>
+</div>
+</div>
+
+<script>
+let tiles = document.querySelectorAll(".tile");
+let matchedTiles = [];
+
+function flipTile(tile) {
+if (matchedTiles.length === 2) {
+matchedTiles.forEach((tile) => {
+tile.classList.remove("matched");
+});
+matchedTiles = [];
+}
+tile.classList.add("matched");
+matchedTiles.push(tile);
+if (matchedTiles.length === 2) {
+if (matchedTiles[0].innerText === matchedTiles[1].innerText) {
+matchedTiles.forEach((tile) => {
+tile.classList.remove("tile");
+tile.classList.add("matched");
+});
+} else {
+setTimeout(() => {
+matchedTiles.forEach((tile) => {
+tile.classList.remove("matched");
+});
+}, 1000);
+}
+}
+}
+
+tiles.forEach((tile) => {
+let randomNumber = Math.floor(Math.random() * 12) + 1;
+tile.innerText = randomNumber;
+});
+</script>
+</body>
+</html>
+
